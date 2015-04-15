@@ -4,6 +4,7 @@ import socket
 from poll import Poll
 from util import tryExec
 from miui_util import login
+import sys
 
 @tryExec(1) #inorder not to throw exception, follows are as the same
 def dailySignIn(opener):

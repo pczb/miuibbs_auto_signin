@@ -4,12 +4,13 @@ import subprocess
 import sys
 import time
 from weibo import send_weibo
+from weibo import getWeiboByID
        
 def getOldIP():
     oldIP = ''
-    if not os.path.exists('/home/pczb/weibo_id.ini'):
+    if not os.path.exists('/home/pczb/miui_bbs/weibo_id.ini'):
         return oldIP
-    with open("/home/pczb/weibo_id.ini") as ifd:
+    with open("/home/pczb/miui_bbs/weibo_id.ini") as ifd:
         weiboid = ifd.readline().rstrip()
         if weiboid != '':
             weibo = getWeiboByID(weiboid)
@@ -26,7 +27,7 @@ def updateIP():
         print newIP, '###',oldIP
         weiboid = send_weibo(newIP)
         if weiboid != None and weiboid != '':
-            outfile = open("/home/pczb/weibo_id.ini","w")
+            outfile = open("/home/pczb/miui_bbs/weibo_id.ini","w")
             outfile.write(weiboid)
             outfile.close()
     

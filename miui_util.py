@@ -15,6 +15,7 @@ def loginErrorHandler(exceptions):
     sys.exit(1)
 
 def getLoginData(htmlpage):
+
     pattern_pdata = re.compile(r'JSP[_]VAR=[{]\s+([^;]+)\s+[}];')
     ret = {}
     for x in pattern_pdata.findall(htmlpage)[0][:-1].split('\n'):
@@ -31,7 +32,7 @@ def getLoginData(htmlpage):
     return ret
 
 
-@tryExec(1, loginErrorHandler, 1)
+@tryExec(3, loginErrorHandler, 10)
 def login(base_url, userName, password):
     login_url = 'https://account.xiaomi.com/pass/serviceLoginAuth2'
     cj = cookielib.CookieJar()

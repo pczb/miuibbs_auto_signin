@@ -4,6 +4,7 @@ import urllib2
 import urllib
 import re
 import random
+import time
 
 class Poll:
 
@@ -43,7 +44,6 @@ class Poll:
         data = {'formhash': ret[1], 'pollanswers[]': ret[2],
                 'pollsubmit':'true'}
 
-        print data
 
         ret[0] = "".join(ret[0].split('amp;'))
         request = self.opener.open('http://www.miui.com/' + ret[0], data = urllib.urlencode(data))
@@ -60,7 +60,8 @@ class Poll:
     def getPollUrl(self, url):
         htmlpage = urllib2.urlopen(url).read()
         pattern_poll_url = re.compile(r'(thread-\d+-\d+-\d+.html)" onclick')
-
+        
+        ret = []
         for x in pattern_poll_url.findall(htmlpage):
             ret.append(x)
         return ret
@@ -78,25 +79,22 @@ class Poll:
         tryCount = 0
         poll_list_url = 'http://www.miui.com/forum.php?mod=forumdisplay&fid=%s&filter=specialtype&specialtype=poll'
 
-        def singlePoll():
-            pollUrls += self.getPollUrl(poll_list_url%(phonesForum[tryCount if tryCount < len(phonesForum) else len(phonesForum) - 1]))
-            random.shuffle(pollUrls)
-            if pollUrls[0] not in visited:
-                thread_url = 'http://www.miui.com/' + pollUrls[0]
-                self.miui_poll(thread_url)
-                succCount += 1
-
-        
+                    
         while succCount < 10 and tryCount < 20:
             try:
-                singlePoll()
+                pollUrls += self.getPollUrl(poll_list_url%(phonesForum[tryCount if tryCount < len(phonesForum) else len(phonesForum) - 1]))
+                random.shuffle(pollUrls)
+                if pollUrls[0] not in visited:
+                    thread_url = 'http://www.miui.com/' + pollUrls[0]
+                    self.miui_poll(thread_url)
+                    succCount += 1
             except Exception, e:
-                raise
                 print e.message
             finally:
-                print pollUrls
-                visited.add(pollUrls[0])
+                if len(pollUrls) != 0:
+                    visited.add(pollUrls[0])
                 tryCount += 1
+                time.sleep(10)
         
 
 
@@ -105,7 +103,6 @@ if __name__ == '__main__':
     socket.setdefaulttimeout(10)
     from miui_util import login
     miui_url = 'http://www.miui.com/member.php?mod=logging&action=miuilogin'
-    opener = login(miui_url, '', '')
     poller = Poll(opener)
 #    poller.miui_poll('http://www.miui.com/thread-2486706-1-1.html')
     poller.autoPoll()
