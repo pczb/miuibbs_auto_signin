@@ -6,4 +6,4 @@
 
 
 ##新增ip变换微博播报
-需要将`weibo.py`中的`access_token`换成你自己的`id`
+需要将`weibo.py`中的`access_token`换成你自己的
