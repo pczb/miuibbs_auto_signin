@@ -10,16 +10,24 @@ import logging
 import rsa
 import binascii
 from Crypto.PublicKey import RSA
+import setting
 
 def defaultWeiboErrorHandler(*args):
     for exception in args:
-        print exception
+        if isinstance(exception, urllib2.HTTPError):
+            print exception.read()
+        else:
+            print exception
 
-def getCommonData(data = {}, access_token = ''):
+def getCommonData(data = {}, access_token = None):
+    if access_token == None:
+        access_token = setting.oauthKey
+
     data["access_token"] = access_token
     return urllib.urlencode(data)
         
-def send_weibo(message, access_token):
+@tryExec(2)
+def send_weibo(message, access_token = None):
     url_sendWeibo = 'https://api.weibo.com/2/statuses/update.json'
     data = {}
     data['status'] = message
@@ -37,11 +45,11 @@ def send_weibo(message, access_token):
         print '发送失败'
     return jsonobj['idstr']
 
-@tryExec(1)
-def getWeiboByID(weiboid):
+@tryExec(2, defaultWeiboErrorHandler, 1)
+def getWeiboByID(weiboid, access_token = None):
     weibo_get_url = 'https://api.weibo.com/2/statuses/show.json'
     data = {'id': weiboid}
-    data = getCommonData(data)
+    data = getCommonData(data, access_token)
     url = weibo_get_url + "?" + data 
     req = urllib2.Request(url)
     response = urllib2.urlopen(req).read()
