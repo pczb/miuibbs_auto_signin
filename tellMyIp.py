@@ -5,6 +5,7 @@ import sys
 import time
 from weibo import send_weibo
 from weibo import getWeiboByID
+import setting
        
 def getOldIP():
     oldIP = ''
@@ -13,7 +14,7 @@ def getOldIP():
     with open("/home/pczb/miui_bbs/weibo_id.ini") as ifd:
         weiboid = ifd.readline().rstrip()
         if weiboid != '':
-            weibo = getWeiboByID(weiboid)
+            weibo = getWeiboByID(weiboid, setting.oauthKey)
             if weibo != None and 'id' in weibo:
                 oldIP = weibo["text"]
 
@@ -25,7 +26,7 @@ def updateIP():
     oldIP = getOldIP()
     if newIP != oldIP:
         print newIP, '###',oldIP
-        weiboid = send_weibo(newIP)
+        weiboid = send_weibo(newIP, setting.oauthKey)
         if weiboid != None and weiboid != '':
             outfile = open("/home/pczb/miui_bbs/weibo_id.ini","w")
             outfile.write(weiboid)
