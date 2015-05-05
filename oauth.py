@@ -112,8 +112,8 @@ class WeiboOauth:
         req = self.opener.open(url, urllib.urlencode(data))
         code_url = req.geturl()
         re_retcode = re.compile(r'code=(.+?)$')
-
-        if not self.redirect_uri in code_url:
+        
+        if not self.redirect_uri[7:] in code_url:
             code_url = self.verifyAccess(req.read())
     
         return re_retcode.findall(code_url)[0]
