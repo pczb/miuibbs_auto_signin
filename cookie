@@ -1,9 +1,0 @@
-#LWP-Cookies-2.0
-Set-Cookie3: deviceId="wb_249838c6-39e1-428b-af22-f087772795e0"; path="/"; domain=".account.xiaomi.com"; path_spec; expires="2083-04-30 17:16:07Z"; version=0
-Set-Cookie3: pass_trace="Fn4rMsR97UbVfzqKUL0ddXbIp+r2r1vXKooBm5KAfgn6yHPObqlC2tiQ2q5CZcVnJ3haUPar9GLmHXEqwT8cVTNrbwrrEyHLlK0q4LVZXSvWhSw2DGKS8MZdy1070h3G"; path="/"; domain=".account.xiaomi.com"; path_spec; expires="2083-04-30 17:16:07Z"; version=0
-Set-Cookie3: uLocale=zh_CN; path="/"; domain=".xiaomi.com"; path_spec; domain_dot; expires="2015-04-27 14:02:01Z"; version=0
-Set-Cookie3: MIUI_2132_auth=f198SxWvLZdj2I2Plb6Yyjd1b6dlgoHnRdHoydAOWvxuy4CPTw; path="/"; domain="www.miui.com"; path_spec; expires="2015-05-12 14:02:01Z"; httponly=None; version=0
-Set-Cookie3: MIUI_2132_lastact="1428847321%09a.php%09"; path="/"; domain="www.miui.com"; path_spec; expires="2015-04-13 14:02:01Z"; version=0
-Set-Cookie3: MIUI_2132_lastvisit=1428843719; path="/"; domain="www.miui.com"; path_spec; expires="2015-05-12 14:01:59Z"; version=0
-Set-Cookie3: MIUI_2132_saltkey=jYYdinsy; path="/"; domain="www.miui.com"; path_spec; expires="2015-05-12 14:01:59Z"; httponly=None; version=0
-Set-Cookie3: MIUI_2132_ulastactivity="ae612DDpjc%2FO2lunR1nMQ0O%2FWjohASYUAEaUjsp6ql7GfqICR7w4TM0"; path="/"; domain="www.miui.com"; path_spec; expires="2016-04-11 14:02:01Z"; version=0
