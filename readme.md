@@ -10,3 +10,7 @@ oauth的参数分别为`appkey`, `redirect_url`, `app_secret`
 
 
 如果要获取`access_key` 请先获得 `code` 然后调用`get_access_token(code)`
+
+##tellMyIp.py可以通知你的电脑IP变化
+默认的只发微博到setting.py的`oauthKey`对应的账号的微博
+并且只告诉最后一个字段的IP
